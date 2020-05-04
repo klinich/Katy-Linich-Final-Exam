@@ -18,8 +18,8 @@ survey <- read_csv("Job Prep Survey Results.csv", skip = 4)
 
 
 
-job_data <- gpa %>%
-  inner_join(demographics)
+job_data <- demographics %>%
+  left_join(gpa, by="ID")
 
 
 ```
