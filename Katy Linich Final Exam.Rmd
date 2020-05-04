@@ -1,0 +1,26 @@
+---
+title: Final Exam
+author: Katy Linich
+date: 5 May 2020
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+
+demographics <- read_csv("Job Prep Demographics.csv",
+                         col_types = cols("Program Type"=col_character()))
+demographics <- demographics %>%
+  fill(`Program Type`, .direction = c("down"))
+
+gpa <- read_csv("Job Prep GPA Data.csv", skip = 4)
+survey <- read_csv("Job Prep Survey Results.csv", skip = 4)
+
+
+
+job_data <- gpa %>%
+  inner_join(demographics)
+
+
+```
+
