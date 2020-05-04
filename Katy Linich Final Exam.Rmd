@@ -14,12 +14,57 @@ demographics <- demographics %>%
   fill(`Program Type`, .direction = c("down"))
 
 gpa <- read_csv("Job Prep GPA Data.csv", skip = 4)
-survey <- read_csv("Job Prep Survey Results.csv", skip = 4)
-
+survey <- read_csv("Job Prep Survey Results.csv", skip = 3)
 
 
 job_data <- demographics %>%
-  left_join(gpa, by="ID")
+  left_join(gpa, by="ID") %>%
+  left_join(survey, by="ID")
+
+job_data <- job_data %>%
+  mutate(avg_GPA=((job_data$`S1 GPA`+job_data$`S2 GPA`)/2))
+```
+
+Here is my previous script for reversed likert items:
+
+```{r}
+library(here)
+total_scores <- function(survey_data, scale_num, vector_num) {
+  survey_matrix <- as.matrix(survey_data)
+  survey_matrix[,vector_num] <- (scale_num+1) - survey_matrix[,vector_num]
+  sum_total_scores <- rowSums(survey_matrix)
+  survey_data$sum <- sum_total_scores
+  return(survey_data)
+}
+```
+
+
+Here is my previous script for residuals:
+```{r}
+library(here)
+largest_residuals <- function(x,y,p) { 
+ linear_model <- lm(y~x)
+ residual <- abs(resid(linear_model))
+ sort_resid <- sort(residual, decreasing = TRUE)
+ low_resid <- sort_resid[p]
+ final_resid <- (residual>=low_resid)
+  return(final_resid)
+}
+```
+
+
+First, I'm using my equation to compile the scores of the assessment.
+```{r}
+job_scores <- total_scores(survey[,2:15], 6, c(4,9,12,13))
+
+all_job_data <- job_data %>%
+  left_join(job_scores)
+
+```
+
+Next, I'm going to create a plot to show the residuals in the data.
+```{r}
+largest_residuals(job_data$sum, job_data$avg_GPA, p)
 
 
 ```
