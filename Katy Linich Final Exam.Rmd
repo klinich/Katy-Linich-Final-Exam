@@ -81,7 +81,19 @@ Now I'm going to create a column for weighted GPA.
 ```{r}
 all_job_data <- all_job_data %>%
   mutate(weighted.gpa=(((all_job_data$`S1 Credits`*all_job_data$`S1 GPA`)+(all_job_data$`S2 Credits`*all_job_data$`S2 GPA`))/(all_job_data$`S1 Credits`+all_job_data$`S2 Credits`)))
-
 ```
 
+Now we can work on answering the research questions.
+
+Question 1: Is senior-year grade point average (GPA) related to the degree of optimism about future employment?
+
+```{r}
+ggplot(all_job_data, aes(all_job_data$weighted.gpa, all_job_data$sum)) +
+  geom_point() + geom_smooth(method = "lm", se=FALSE) + xlab("Weighted GPA") +
+  ylab("Level of Optimism") + labs(title="Relationship between Senior Year Weighted GPA and Optimism About Employment")
+```
+From what we can see here, there appears to be a very slight, negative relationship between weighted GPA and level of optimism about future employment. 
+
+
+Question 2: 
 
