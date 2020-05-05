@@ -79,6 +79,8 @@ This could be an issue, because there's no real discernable trend when you use a
 
 Now I'm going to create a column for weighted GPA.
 ```{r}
+all_job_data <- all_job_data %>%
+  mutate(weighted.gpa=(((all_job_data$`S1 Credits`*all_job_data$`S1 GPA`)+(all_job_data$`S2 Credits`*all_job_data$`S2 GPA`))/(all_job_data$`S1 Credits`+all_job_data$`S2 Credits`)))
 
 ```
 
