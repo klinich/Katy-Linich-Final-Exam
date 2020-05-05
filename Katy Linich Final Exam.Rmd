@@ -64,8 +64,22 @@ all_job_data <- job_data %>%
 
 Next, I'm going to create a plot to show the residuals in the data.
 ```{r}
-largest_residuals(job_data$sum, job_data$avg_GPA, p)
+gpa_resid <- largest_residuals(all_job_data$sum, all_job_data$avg_GPA)
 
+gpa_plot <- plot(all_job_data$sum~all_job_data$avg_GPA,
+     main = "Relationship between Avg GPA and Optimism",
+     xlab = "Avg GPA",
+     ylab = "Optimism",
+     col = ifelse(gpa_resid, "red","black"))
+```
+This could be an issue, because there's no real discernable trend when you use average GPA. It may be more useful to use weighted GPA.
+
+
+
+
+Now I'm going to create a column for weighted GPA.
+```{r}
 
 ```
+
 
