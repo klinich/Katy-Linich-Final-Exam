@@ -85,7 +85,7 @@ all_job_data <- all_job_data %>%
 
 Now we can work on answering the research questions.
 
-Question 1: Is senior-year grade point average (GPA) related to the degree of optimism about future employment?
+#Question 1: Is senior-year grade point average (GPA) related to the degree of optimism about future employment?
 
 ```{r}
 ggplot(all_job_data, aes(all_job_data$weighted.gpa, all_job_data$sum)) +
@@ -95,7 +95,7 @@ ggplot(all_job_data, aes(all_job_data$weighted.gpa, all_job_data$sum)) +
 From what we can see here, there appears to be a very slight, negative relationship between weighted GPA and level of optimism about future employment. 
 
 
-Question 2: Is the relationship of GPA and optimism consistent or different for different categories of disciplines?
+#Question 2: Is the relationship of GPA and optimism consistent or different for different categories of disciplines?
 
 ```{r}
 ggplot(all_job_data, aes(all_job_data$weighted.gpa, all_job_data$sum, color=all_job_data$`Program Type`)) +
@@ -103,5 +103,36 @@ ggplot(all_job_data, aes(all_job_data$weighted.gpa, all_job_data$sum, color=all_
   xlab("Weighted GPA") +
   ylab("Level of Optimism") + labs(title="Relationship between Senior Year Weighted GPA and Optimism About Employment", color="Program Type")
 ```
+As you can see from the plot, it appears to be mostly consistent across program types. However, you can see a slightly steeper negative relationship between GPA and optimism for the applied sciences.
 
+#Question 3: Is the level of optimism different for different categories of disciplines?
+
+```{r include=TRUE}
+jobs_anova <- anova(lm(all_job_data$sum~all_job_data$`Program Type`), all_job_data)
+jobs_anova
+```
+
+First, we find significant results in the omnibus test, so we can continue to a pairwise test.
+
+```{r include=TRUE}
+jobs_test <- pairwise.t.test(all_job_data$sum, all_job_data$`Program Type`, p.adj ="none" )
+jobs_test
+```
+This shows us that there is a significant difference between means for all except for social sciences and natural sciences, and formal sciences and applied sciences.
+
+```{r}
+library(Rmisc)
+job_intervals <- group.CI(all_job_data$sum ~ all_job_data$`Program Type`, all_job_data,
+                          ci=0.95)
+job_intervals
+```
+Here, we can see the 95% confidence intervals for job preparation perception across program types.
+
+Now, we can construct a plot to show the differences between job preparation perception across programs.
+```{r}
+ggplot(all_job_data, aes(all_job_data$`Program Type`, all_job_data$sum, color=all_job_data$`Program Type`)) + geom_boxplot() +
+   xlab("Program") +
+  ylab("Level of Optimism") + labs(title="Relationship between Program and Optimism About Employment") + theme(legend.position = "none")
+```
+From these boxplots, we can see that there are some differences between program types when it comes to job preparation perception. Humanties looks to have lower optimism about being prepared for and finding a job in their field. Formal sciences seems to have higher overall optimism about being prepared for and finding a job in their field.
 
