@@ -95,5 +95,13 @@ ggplot(all_job_data, aes(all_job_data$weighted.gpa, all_job_data$sum)) +
 From what we can see here, there appears to be a very slight, negative relationship between weighted GPA and level of optimism about future employment. 
 
 
-Question 2: 
+Question 2: Is the relationship of GPA and optimism consistent or different for different categories of disciplines?
+
+```{r}
+ggplot(all_job_data, aes(all_job_data$weighted.gpa, all_job_data$sum, color=all_job_data$`Program Type`)) +
+  geom_point() + geom_smooth(method = "lm", se=FALSE) + 
+  xlab("Weighted GPA") +
+  ylab("Level of Optimism") + labs(title="Relationship between Senior Year Weighted GPA and Optimism About Employment", color="Program Type")
+```
+
 
