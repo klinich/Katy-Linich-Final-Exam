@@ -1,0 +1,52 @@
+Katy Linich
+
+General comments:
+
+You showed much learning in this project. I know that you have struggled at times, but I truly believe that
+you have mastered many of the fundamentals and just need more practice. I truly hope you will not let this
+learning fade away, but will instead find as many opportunities as you can to develop your skills. I know
+that you will become more and more comfortable with it every time that you do and will get better at it.
+Remember that we went well beyond many of the basic elements that you'll need for most of your work.
+It has been a pleasure having you in the course this semester.
+
+Total score: 60
+
+
+
+Reproducibilty: 8
+
+Correctly initiated a repo and tracked the project with descriptive comments. Readme file is sparse and not
+descriptive for outsiders. No .gitignore created.
+
+Neatness: 8
+
+A well-documented project with appropriate narrative. Adherence to the style guide throughout the notebook.
+Readable output, but could have used a few more section headings and provided more narrative with statistics
+and graphs for the three research questions.
+
+Functions: 10
+
+Functions work correctly, but they are included in the main notebook and the arguments and output are not
+documented.
+
+Data prep: 9
+
+All data read in, but did not check primary keys so did not find bad key in GPA. Correctly scored the Likert
+survey data. Did not remove highest residuals. Joined all files.
+
+Graphs: 15
+
+Graphs are attractive, well-labeled, and appropriate for investigating the research questions.
+
+Descriptive statistics: 5
+
+Calculated means for the third question, but did not calculate any descriptive statistics (e.g., correlations)
+for the first two questions.
+
+Inferential statistics: 5
+
+Calculated inferential statistics for the third question, but did not calculate any for the first two questions.
+
+Team collaboration: 0
+
+No pull request ever received.
